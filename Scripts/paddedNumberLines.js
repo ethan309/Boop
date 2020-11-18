@@ -1,6 +1,6 @@
 /**
 	{
-		"api" :1,
+		"api":1,
 		"name":"Add Zero-padded Line Numbers",
 		"description":"Number Lines with Ascending, Zero-padded Labels",
 		"author":"Ethan Bütt (ethan309)",

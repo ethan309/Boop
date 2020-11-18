@@ -1,6 +1,6 @@
 /**
 	{
-		"api" :1,
+		"api":1,
 		"name":"Add Line Numbers",
 		"description":"Number Lines with Ascending Labels",
 		"author":"Ethan Bütt (ethan309)",
