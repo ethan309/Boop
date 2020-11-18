@@ -41,17 +41,14 @@ const buildGroupsFromArray = (array, groupSize) => {
     if(groupSize < 1) throw new Error('Group size must be a positive integer!');
     array = array.slice(0);
 
-    // final group may be smaller than requested due to lack of items
-    const potentialLastGroupSize = array.length % groupSize;
-    const lastItems = potentialLastGroupSize !== 0 ? [] : array.splice(array.length - potentialLastGroupSize, potentialLastGroupSize);
-
     // build groups
     const groups = [];
-    while(array.length > lastItems.length) {
+    while(array.length > array.length % groupSize) {
         groups.push(array.splice(0, groupSize).join(', '));
     }
-    if(lastItems.length > 0) {
-        groups.push(lastItems.splice(0, groupSize).join(', '));
+    // final group may be smaller than requested due to lack of items
+    if(array.length > 0) {
+        groups.push(array.splice(0).join(', '));
     }
 
     return groups;
