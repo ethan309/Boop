@@ -17,6 +17,9 @@ const getRandomInt = (min, max) => {
     return Math.floor(min + Math.random() * (max - min));
 }
 
+/**
+ * @param {Array[*]} array - array of items to be shuffled
+ */
 const shuffleArray = (array) => {
     const shuffledArray = [];
     
@@ -29,20 +32,35 @@ const shuffleArray = (array) => {
     return shuffledArray;
 }
 
+/**
+ * @param {Array[String]} array - array of items to be grouped
+ * @param {int} groupSize - desired group size (positive integer)
+ */
+const buildGroupsFromArray = (array, groupSize) => {
+    if(groupSize < 1) throw new Error('Group size must be a positive integer!');
+
+    // final group may be smaller than requested due to lack of items
+    const potentialLastGroupSize = array.length % groupSize;
+    const lastItems = potentialLastGroupSize !== 0 ? [] : array.splice(array.length - potentialLastGroupSize, potentialLastGroupSize);
+
+    // build groups
+    const groups = [];
+    while(array.length > lastItems.length) {
+        groups.push(array.splice(0, groupSize).join(', '));
+    }
+    if(lastItems.length > 0) {
+        groups.push(lastItems.splice(0, groupSize).join(', '));
+    }
+
+    return groups;
+}
+
 function main(state) {
     try {
         const inputLines = state.fullText.split('\n');
         const shuffledItems = shuffleArray(inputLines);
-        // when there is an odd number of items, do not pair the final item
-        const lastItem = shuffledItems.length % 2 === 0 ? undefined : shuffledItems.splice(shuffledItems.length - 1, 1);
 
-        const outputLines = [];
-        for(var i = 0; i < shuffledItems.length; i += 2) {
-            outputLines.push(`${shuffledItems[i]}, ${shuffledItems[i + 1]}`);
-        }
-        if(lastItem) {
-            outputLines.push(lastItem);
-        }
+        const outputLines = buildGroupsFromArray(shuffledItems, 2); // groups of 2
 
         state.fullText = outputLines.join('\n');
     } catch(error) {
