@@ -1,7 +1,7 @@
 /**
 	{
 		"api":1,
-		"name":"Pair Line Items",
+		"name":"Pair Line Items Randomly",
 		"description":"Group line items into random pairs (last group may have only one element)",
 		"author":"Ethan Bütt (ethan309)",
 		"icon":"sort-numbers",
@@ -21,6 +21,7 @@ const getRandomInt = (min, max) => {
  * @param {Array[*]} array - array of items to be shuffled
  */
 const shuffleArray = (array) => {
+    array = array.slice(0);
     const shuffledArray = [];
     
     // build shuffled array by randomly taking elements out of ordered array
@@ -38,6 +39,7 @@ const shuffleArray = (array) => {
  */
 const buildGroupsFromArray = (array, groupSize) => {
     if(groupSize < 1) throw new Error('Group size must be a positive integer!');
+    array = array.slice(0);
 
     // final group may be smaller than requested due to lack of items
     const potentialLastGroupSize = array.length % groupSize;
