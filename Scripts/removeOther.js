@@ -5,7 +5,7 @@
 		"description":"Remove all text not currently selected",
 		"author":"Ethan Bütt (ethan309)",
 		"icon":"type",
-        "tags":"remove, text, select, filter"
+        "tags":"remove, text, select, filter, other"
 	}
 **/
 
